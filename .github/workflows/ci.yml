@@ -104,17 +104,19 @@ jobs:
       matrix:
         os: [macos-latest, ubuntu-latest]
         luarocks_version: [3.8.0]
-        lua_engine: [Lua]
-        lua_version: [lua5.1, lua5.2, lua5.3, lua5.4]
-        include:
-          - lua_engine: LuaJIT
-            lua_version: luajit2.1
+        lua: [
+          { engine: "Lua", version: "lua5.1" },
+          { engine: "Lua", version: "lua5.2" },
+          { engine: "Lua", version: "lua5.3" },
+          { engine: "Lua", version: "lua5.4" },
+          { engine: "LuaJIT", version: "luajit2.1" },
+        ]
     env:
       # For LuaJIT 2.1, see https://github.com/LuaJIT/LuaJIT/commit/8961a92dd1607108760694af3486b4434602f8be
       MACOSX_DEPLOYMENT_TARGET: 10.12
       LUAROCKS: ${{ matrix.luarocks_version }}
-      LUA: ${{ matrix.lua_version }}
-      WITH_LUA_ENGINE: ${{ matrix.lua_engine }}
+      LUA: ${{ matrix.lua.version }}
+      WITH_LUA_ENGINE: ${{ matrix.lua.engine }}
 
     steps:
     - uses: actions/checkout@v2
