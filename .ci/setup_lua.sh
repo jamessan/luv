@@ -120,6 +120,10 @@ cd "$GITHUB_WORKSPACE"
 
 luarocks --version
 
+if [ "$LUAJIT" == "no" ]; then
+  luarocks config lua_version ${LUA#lua}
+fi
+
 rm -rf "$LUAROCKS_BASE"
 
 if [ "$LUAJIT" == "yes" ]; then
