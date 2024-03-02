@@ -112,7 +112,7 @@ jobs:
     - name: Build
       run: CMAKE_OPTIONS="-DCMAKE_PREFIX_PATH=$HOME/.libuv_min" make
     - name: Test
-      run: make test
+      run: sudo -E unshare -n runuser -u `id -u -n` make test
 
   build:
     runs-on: ${{ matrix.os }}
